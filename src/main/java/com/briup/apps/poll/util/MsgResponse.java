@@ -38,5 +38,9 @@ public class MsgResponse {
 	public void setData(Object data) {
 		this.data = data;
 	}
+	public static MsgResponse error(String message2) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 }
