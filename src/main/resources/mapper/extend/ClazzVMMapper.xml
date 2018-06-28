@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.briup.apps.poll.dao.extend.ClazzVMMappr">
+	<!-- 通过id查询到后，结果映射到resultMap= -->
+	<select id="selectAll" resultMap="ClazzVMResultMap">
+		<!-- id name description grade_id charge_id -->
+		select * from poll_clazz
+	</select>
+	<!-- 定义一个resultMap,实际上是映射ClazzVM -->
+	<resultMap type="com.briup.apps.poll.bean.extend.ClazzVM" id="ClazzVMResultMap">
+		<!-- 列，property-代表类当中的属性-映射到对象中的属性 -->
+		<id column="id" property="id" />
+		<result column="name" property="name" />
+		<result column="description" property="description" />
+		<!-- 分成两部分，下面为关联关系 -->
+		<!-- 虽然是写的ClazzVMMappr，但是我们扩展的要调用自动产生的ClazzMapper -->
+<!-- 这一句不会改，地址不对 -->
+		<association 
+		    column="grade_id"
+			select="com.briup.apps.poll.dao.GradeMapper.selectByPrimaryKey"
+			property="grade">
+		</association>	
+		<association 
+		    column="charge_id"
+			select="com.briup.apps.poll.dao.UserMapper.selectByPrimaryKey"
+			property="charge">
+		</association>
+	</resultMap>
+</mapper>

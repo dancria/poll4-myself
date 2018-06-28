@@ -20,14 +20,15 @@ public class CourseServiceImpl implements ICourseService{
 		//创建空模板
 		CourseExample example=new CourseExample();
 		//调用。查询，并返回结果。
-		return courseMapper.selectByExample(example);
+		//selectByExampleWithBLOBs主要是为数据库类型为text类型的设置
+		return courseMapper.selectByExampleWithBLOBs(example);
 	}
 
 	@Override
 	public List<Course> query(String keywords) throws Exception {
 		CourseExample example=new CourseExample();
 		example.createCriteria().andNameLike(keywords);
-		return courseMapper.selectByExample(example);
+		return courseMapper.selectByExampleWithBLOBs(example);
 	}
 
 	@Override
